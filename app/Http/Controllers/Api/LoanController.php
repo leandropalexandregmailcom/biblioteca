@@ -8,7 +8,6 @@ use OpenApi\Annotations as OA;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LoanResource;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * @OA\Info(
@@ -39,7 +38,6 @@ use Illuminate\Support\Facades\Auth;
  *     @OA\Property(property="updated_at", type="string", format="date-time")
  * )
  */
-
 class LoanController extends Controller
 {
     /**
@@ -63,7 +61,7 @@ class LoanController extends Controller
      */
     public function loanIndex()
     {
-        return LoanResource::collection(Loan::where('user_id', Auth::id())->get());
+        return LoanResource::collection(Loan::all());
     }
 
     /**
@@ -74,7 +72,8 @@ class LoanController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"book_id", "loan_date"},
+     *             required={"user_id", "book_id", "loan_date"},
+     *             @OA\Property(property="user_id", type="integer", example=1),
      *             @OA\Property(property="book_id", type="integer", example=1),
      *             @OA\Property(property="loan_date", type="string", format="date", example="2024-07-26"),
      *             @OA\Property(property="return_date", type="string", format="date", example="2024-08-26")
@@ -94,6 +93,7 @@ class LoanController extends Controller
     public function loanStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'user_id' => 'required|integer|exists:users,id',
             'book_id' => 'required|integer|exists:books,id',
             'loan_date' => 'required|date',
             'return_date' => 'nullable|date',
@@ -104,7 +104,7 @@ class LoanController extends Controller
         }
 
         $loan = Loan::create([
-            'user_id' => Auth::id(),
+            'user_id' => $request->user_id,
             'book_id' => $request->book_id,
             'loan_date' => $request->loan_date,
             'return_date' => $request->return_date,
@@ -112,7 +112,6 @@ class LoanController extends Controller
 
         return new LoanResource($loan);
     }
-
 
     /**
      * @OA\Get(
@@ -138,7 +137,7 @@ class LoanController extends Controller
      */
     public function loanShow($id)
     {
-        $loan = Loan::where('id', $id)->where('user_id', Auth::id())->first();
+        $loan = Loan::find($id);
         if (!$loan) {
             return response()->json(['message' => 'Loan not found'], 404);
         }
@@ -182,7 +181,7 @@ class LoanController extends Controller
      */
     public function loanUpdate(Request $request, $id)
     {
-        $loan = Loan::where('id', $id)->where('user_id', Auth::id())->first();
+        $loan = Loan::find($id);
         if (!$loan) {
             return response()->json(['message' => 'Loan not found'], 404);
         }
@@ -228,7 +227,7 @@ class LoanController extends Controller
      */
     public function loanDestroy($id)
     {
-        $loan = Loan::where('id', $id)->where('user_id', Auth::id())->first();
+        $loan = Loan::find($id);
         if (!$loan) {
             return response()->json(['message' => 'Loan not found'], 404);
         }

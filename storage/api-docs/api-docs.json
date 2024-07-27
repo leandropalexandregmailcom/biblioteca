@@ -546,10 +546,15 @@
                         "application/json": {
                             "schema": {
                                 "required": [
+                                    "user_id",
                                     "book_id",
                                     "loan_date"
                                 ],
                                 "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
                                     "book_id": {
                                         "type": "integer",
                                         "example": 1
