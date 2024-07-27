@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -64,3 +65,24 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# biblioteca
+API RESTful que simula o sistema de gerenciamento de uma biblioteca.
+
+php 8.2
+
+# Instale as dependências
+composer install
+
+# Configure o arquivo de ambiente
+cp .env.example .env
+
+# Gere a chave da aplicação
+php artisan key:generate
+
+# Execute as migrations
+php artisan migrate
+
+# Inicie o servidor local
+php artisan serve
+>>>>>>> a663841a32f40fe28fcdf2b0d136e2960e02ac72
