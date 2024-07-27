@@ -1,7 +1,7 @@
 # Biblioteca
 API RESTful que simula o sistema de gerenciamento de uma biblioteca.
 
-# Requisitos: PHP 8.2, Composer, MySQL
+# Requisitos: PHP 8.2, Composer e MySQL.
 
 composer install
 cp .env.example .env
