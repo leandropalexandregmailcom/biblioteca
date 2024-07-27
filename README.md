@@ -14,3 +14,7 @@ php artisan serve
 # Nota: Configure o banco de dados e o e-mail no arquivo .env
 #        - Para o banco de dados, ajuste as variáveis DB_*.
 #        - Para o e-mail, ajuste as variáveis MAIL_*.
+![image](https://github.com/user-attachments/assets/d619619e-83df-44de-a451-a8ba9c5d2f4f)
+![image](https://github.com/user-attachments/assets/d5ab57fb-4bb8-48c9-90da-b5154682599a)
+![image](https://github.com/user-attachments/assets/ffe845be-4973-4bc3-bec5-4026161b825d)
+![image](https://github.com/user-attachments/assets/20996ef1-1110-4018-a6b7-9c5d13606b0c)
