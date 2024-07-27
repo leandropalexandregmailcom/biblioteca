@@ -72,10 +72,9 @@ class LoanController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"user_id", "book_id", "loan_date"},
+     *             required={"user_id", "book_id"},
      *             @OA\Property(property="user_id", type="integer", example=1),
      *             @OA\Property(property="book_id", type="integer", example=1),
-     *             @OA\Property(property="loan_date", type="string", format="date", example="2024-07-26"),
      *             @OA\Property(property="return_date", type="string", format="date", example="2024-08-26")
      *         )
      *     ),
@@ -95,7 +94,6 @@ class LoanController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'book_id' => 'required|integer|exists:books,id',
-            'loan_date' => 'required|date',
             'return_date' => 'nullable|date',
         ]);
 
@@ -106,7 +104,7 @@ class LoanController extends Controller
         $loan = Loan::create([
             'user_id' => $request->user_id,
             'book_id' => $request->book_id,
-            'loan_date' => $request->loan_date,
+            'loan_date' => now(),
             'return_date' => $request->return_date,
         ]);
 
@@ -158,9 +156,8 @@ class LoanController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"book_id", "loan_date"},
+     *             required={"book_id"},
      *             @OA\Property(property="book_id", type="integer", example=1),
-     *             @OA\Property(property="loan_date", type="string", format="date", example="2024-07-26"),
      *             @OA\Property(property="return_date", type="string", format="date", example="2024-08-26")
      *         )
      *     ),
@@ -188,7 +185,6 @@ class LoanController extends Controller
 
         $validator = Validator::make($request->all(), [
             'book_id' => 'required|integer|exists:books,id',
-            'loan_date' => 'required|date',
             'return_date' => 'nullable|date',
         ]);
 
@@ -198,7 +194,6 @@ class LoanController extends Controller
 
         $loan->update([
             'book_id' => $request->book_id,
-            'loan_date' => $request->loan_date,
             'return_date' => $request->return_date,
         ]);
         return new LoanResource($loan);

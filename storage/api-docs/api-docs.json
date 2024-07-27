@@ -547,8 +547,7 @@
                             "schema": {
                                 "required": [
                                     "user_id",
-                                    "book_id",
-                                    "loan_date"
+                                    "book_id"
                                 ],
                                 "properties": {
                                     "user_id": {
@@ -558,11 +557,6 @@
                                     "book_id": {
                                         "type": "integer",
                                         "example": 1
-                                    },
-                                    "loan_date": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2024-07-26"
                                     },
                                     "return_date": {
                                         "type": "string",
@@ -649,18 +643,12 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "book_id",
-                                    "loan_date"
+                                    "book_id"
                                 ],
                                 "properties": {
                                     "book_id": {
                                         "type": "integer",
                                         "example": 1
-                                    },
-                                    "loan_date": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2024-07-26"
                                     },
                                     "return_date": {
                                         "type": "string",
