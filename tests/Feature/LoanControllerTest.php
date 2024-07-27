@@ -49,8 +49,8 @@ class LoanControllerTest extends TestCase
         $user = User::factory()->create();
         $loan = Loan::factory()->create(['user_id' => $user->id]);
         $updateData = [
-            'book_id' => $loan->book_id, // Incluir o campo book_id
-            'return_date' => now()->addDays(7)->format('Y-m-d') // Corrigir o formato da data
+            'book_id' => $loan->book_id,
+            'return_date' => now()->addDays(7)->format('Y-m-d')
         ];
 
         $response = $this->actingAs($user)->putJson("/api/loanUpdate/{$loan->id}", $updateData);
@@ -70,8 +70,6 @@ class LoanControllerTest extends TestCase
         $response = $this->actingAs($user)->deleteJson("/api/loanDestroy/{$loan->id}");
 
         $response->assertStatus(204);
-
-        // Verifique se o registro foi marcado como excluído (soft delete)
         $this->assertSoftDeleted('loans', ['id' => $loan->id]);
     }
 }
